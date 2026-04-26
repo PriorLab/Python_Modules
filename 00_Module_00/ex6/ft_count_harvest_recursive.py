@@ -1,9 +1,14 @@
-def ft_count_harvest_recursive(harvy, day0 = 1):
-	if day0 > harvy:
-		print("Harvest time!")
-	else:
-		print("Day ", day0)
-		ft_count_harvest_recursive(harvy, day0 + 1)
+def ft_count_harvest_recursive(harvest=None, day0=1) -> None:
+    if harvest is None:
+        harvest = int(input("Days until harvest: "))
+    if harvest <= 0:
+        print("Invalid argument")
+        return
+    if day0 > harvest:
+        print("Harvest time!")
+        return
+    print(f"Day {day0}")
+    ft_count_harvest_recursive(harvest, day0 + 1)
 
-harvy = int(input("Days until harvest: "))
-ft_count_harvest_recursive(harvy)
+
+ft_count_harvest_recursive()
