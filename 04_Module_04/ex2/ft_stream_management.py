@@ -18,18 +18,14 @@ def open_ancient_text(path: list[str]) -> None:
             print("\n---")
             print(f"File '{path[1]}' closed.")
 
-    except FileNotFoundError:
-        print(
-            f"Error opening file '{path[1]}':"
-            f" [Errno 2] No such file or directory: '{path[1]}'"
-        )
+    except FileNotFoundError as e:
+        print(f"[STDERR] Error opening file '{path[1]}': {e}", file=sys.stderr)
         return
 
-    except PermissionError:
+    except PermissionError as e:
         print(
-            f"Error opening file '{path[1]}':"
-            f" [Errno 13] Permission denied: '{path[1]}'"
-        )
+            f"[STDERR] Error opening file '{path[1]}': {e}", file=sys.stderr)
+        print("Data not saved.")
         return
 
     print("\nTransform data:\n---\n")
@@ -47,7 +43,9 @@ def open_ancient_text(path: list[str]) -> None:
     except OSError:
         print("Error transforming data")
         return
-    file_name: str = input("Enter new file name (or empty):")
+    sys.stdout.write("Enter new file name (or empty): ")
+    sys.stdout.flush()
+    file_name: str = sys.stdin.readline().strip()
     if file_name == "":
         print("Not saving data.")
         return
@@ -57,8 +55,9 @@ def open_ancient_text(path: list[str]) -> None:
             with open(file_name, "w", encoding="utf-8") as file:
                 file.write(transform)
                 print(f"Data saved in file {file_name}")
-        except OSError:
-            print("Error writing new file")
+        except OSError as e:
+            print(f"[STDERR] Error opening file {file_name}: {e}")
+            print("Data not saved.")
         return
 
 

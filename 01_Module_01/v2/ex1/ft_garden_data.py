@@ -5,7 +5,7 @@ class Plant:
         self.age = age
 
     def show(self):
-        print(f"{self.name}: {self.height:.1f}cm, {self.age} days old")
+        print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 
 def create_plants() -> list[Plant]:

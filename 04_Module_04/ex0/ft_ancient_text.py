@@ -1,17 +1,35 @@
-def recover_text() -> None:
-    print('=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===\n')
-    print('Accessing Storage Vault: ancient_fragment.txt')
-    try:
-        with open("ancient_fragment.txt", "r") as file:
-            print('Connection established...')
-            print('RECOVERED DATA:')
-            print(file.read())
-            print('Data recovery complete. Storage unit disconnected.')
-    except FileNotFoundError:
-        print('Error: Storage Vault not found. Try running data generator first')
+import sys
 
-def main()-> None:
-    recover_text()
+
+def open_ancient_text(path: list[str]) -> None:
+    if len(path) != 2:
+        print("Usage: ft_ancient_text.py <file>")
+        return
+
+    print("=== Cyber Archives Recovery ===")
+    print(f"Accessing file '{path[1]}'")
+
+    try:
+        with open(path[1], "r", encoding="utf-8") as file:
+            text: str = file.read()
+
+            print("---\n")
+            print(text)
+            print("\n---")
+            print(f"File '{path[1]}' closed.")
+
+    except FileNotFoundError:
+        print(
+            f"Error opening file '{path[1]}':"
+            f" [Errno 2] No such file or directory: '{path[1]}'"
+        )
+
+    except PermissionError:
+        print(
+            f"Error opening file '{path[1]}':"
+            f" [Errno 13] Permission denied: '{path[1]}'"
+        )
+
 
 if __name__ == "__main__":
-    main()
+    open_ancient_text(sys.argv)
