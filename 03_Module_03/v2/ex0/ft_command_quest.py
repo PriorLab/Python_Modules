@@ -10,8 +10,8 @@ def show_args(args: list[str]) -> None:
         print("No arguments provided!")
     else:
         print(f"Arguments received: {length - 1}")
-        for i in range(length):
-            print(f"Argument {i + 1}: {args[i]}")
+        for i in range(1, length):
+            print(f"Argument {i}: {args[i]}")
     print(f"Total arguments: {len(args)}")
 
 

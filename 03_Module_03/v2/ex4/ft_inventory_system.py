@@ -2,6 +2,10 @@ import sys
 
 
 def inventory_analysis(players: list[str]) -> None:
+    if len(players) == 1:
+        return (print(
+            "Insert inventory items with the format: <item_name>:<quantity>"
+        ))
     print("=== Inventory System Analysis ===")
     inventory: dict[str, int] = {}
     for arg in players[1:]:
@@ -15,7 +19,7 @@ def inventory_analysis(players: list[str]) -> None:
         try:
             inventory[item] = int(qtty)
         except ValueError as e:
-            print(f"Quantity error for '{item}' , {e}")
+            print(f"Quantity error for '{item}': {e}")
     item_list: list[str] = list(inventory.keys())
     total = len(inventory.keys())
     sumatory = sum(inventory.values())
@@ -23,12 +27,12 @@ def inventory_analysis(players: list[str]) -> None:
     least: str = min(inventory, key=lambda k: inventory[k])
     print(f"Got inventory: {inventory}")
     print(f"Item list: {item_list}")
-    print(f"Total quantity of {total} items: {sumatory}")
+    print(f"Total quantity of the {total} items: {sumatory}")
     for i in inventory:
         perc = inventory[i] / sum(inventory.values())
         print(f"Item {i} represents {perc:.1%}")
-    print(f"Item most abundant: {most}")
-    print(f"Item least abundant: {least}")
+    print(f"Item most abundant: {most} with quantity {inventory[most]}")
+    print(f"Item least abundant: {least} with quantity {inventory[least]}")
     inventory['magic_item'] = 1
     print(f"Updated inventory: {inventory}")
 

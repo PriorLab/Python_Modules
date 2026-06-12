@@ -21,7 +21,7 @@ def get_player_pos() -> tuple[float, float, float]:
                 try:
                     float(part.strip())
                 except ValueError:
-                    print(f"Error on parameter '{part.strip()}: {e}")
+                    print(f"Error on parameter '{part.strip()}': {e}")
                     break
 
 
@@ -50,4 +50,8 @@ def main() -> None:
     print("Get a second set of coordinates")
     coord2 = get_player_pos()
     d_to_center2 = d_to_center_calculus(coord1, coord2)
-    print(f"Distance to center: {d_to_center2:.4f}\n")
+    print(f"Distance between the 2 sets of coordinates: {d_to_center2:.4f}\n")
+
+
+if __name__ == "__main__":
+    main()

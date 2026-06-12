@@ -1,7 +1,8 @@
 import random
+from typing import Generator
 
 
-def gen_event():
+def gen_event() -> Generator[tuple[str, str], None, None]:
     players = ['Alice', 'Bob', 'Charlie', 'Dylan']
     actions = ['run', 'eat', 'sleep', 'grab', 'move', 'climb', 'swim']
     while True:
@@ -10,7 +11,9 @@ def gen_event():
         yield (name, action)
 
 
-def consume_event(events: list[tuple[str, str]]):
+def consume_event(
+        events: list[tuple[str, str]]
+) -> Generator[tuple[str, str], None, None]:
     while (len(events) > 0):
         event = random.choice(events)
         events.remove(event)
@@ -22,13 +25,13 @@ def main() -> None:
     generator = gen_event()
     for i in range(1000):
         name, action = next(generator)
-        print(f"Event {i}: PLayer {name} did action {action}")
+        print(f"Event {i}: Player {name} did action {action}")
 
     ten_events: list[tuple[str, str]] = []
     generator2 = gen_event()
     for i in range(10):
         ten_events.append(next(generator2))
-    print(f"Built list of 10 events: [{ten_events}]")
+    print(f"Built list of 10 events: {ten_events}")
     for event in consume_event(ten_events):
         print(f"Got event from list: {event}")
         print(f"Remains in list: {ten_events}")
